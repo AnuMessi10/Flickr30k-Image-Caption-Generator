@@ -1,14 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import PhotoSizeSelectActualTwoToneIcon from "@mui/icons-material/PhotoSizeSelectActualTwoTone";
+
 
 const Upload = () => {
   const Input = styled("input")({
     display: "none",
   });
+  const[data, setData]=useState([{}]);
+
+  useEffect(() => {
+    fetch("/members").then(
+      res => res.json()
+    ).then(
+      data => {setData(data)
+      console.log(data)
+      }
+    )
+  }, []);
   const [fileName, setFileName] = useState("");
   console.info(fileName);
+  console.log(data);
 
   return (
     <div>
